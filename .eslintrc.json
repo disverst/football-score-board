@@ -1,3 +1,74 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "es2022": true,
+    "browser": true
+  },
+  "extends": [
+    "next",
+    "airbnb",
+    "prettier",
+    "next/core-web-vitals",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier", "@typescript-eslint"],
+  "rules": {
+    "no-shadow": "off",
+    "react/prop-types": 0,
+    "global-require": "error",
+    "import/extensions": "off",
+    "max-lines": ["error", 300],
+    "prettier/prettier": "error",
+    "jsx-a11y/anchor-is-valid": 0,
+    "no-restricted-exports": "error",
+    "react/jsx-props-no-spreading": 0,
+    "click-events-have-key-events": "off",
+    "react/jsx-one-expression-per-line": 0,
+    "react/require-default-props": "off",
+    "no-promise-executor-return": "error",
+    "@typescript-eslint/ban-types": "error",
+    "@typescript-eslint/no-shadow": "error",
+    "max-lines-per-function": ["error", 150],
+    "react/jsx-no-useless-fragment": "error",
+    "jsx-a11y/click-events-have-key-events": 0, // issue 342
+    "jsx-a11y/control-has-associated-label": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "react/function-component-definition": "off",
+    "import/no-extraneous-dependencies": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-var-requires": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "react/no-unstable-nested-components": "error",
+    "@typescript-eslint/no-empty-function": "error",
+    "no-param-reassign": ["error", { "props": false }],
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".tsx"] }
+    ],
+    "no-unused-expressions": [
+      "error",
+      { "allowShortCircuit": true, "allowTernary": true }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ]
+  }
 }
