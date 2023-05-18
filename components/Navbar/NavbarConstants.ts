@@ -1,7 +1,7 @@
 export enum TabRoutes {
   mainUrl = '/',
   homeUrl = '/home',
-  scoreBoardUrl = '/scoreBoard',
+  scoreBoardUrl = '/score-board',
 }
 
 export const pages = [
