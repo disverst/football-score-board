@@ -41,7 +41,7 @@ const UserMenu: React.FC = () => {
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="User photo" src={undefined} />
+          <Avatar alt="User photo" src="/avatar.png" />
         </IconButton>
       </Tooltip>
       <Menu
