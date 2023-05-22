@@ -1,0 +1,81 @@
+export const gamesData = [
+  { id: 1, homeTeam: 'Mexico', awayTeam: 'Canada', homeScore: 0, awayScore: 0 },
+  { id: 2, homeTeam: 'Spain', awayTeam: 'Brazil', homeScore: 0, awayScore: 0 },
+  {
+    id: 3,
+    homeTeam: 'Germany',
+    awayTeam: 'France',
+    homeScore: 0,
+    awayScore: 0,
+  },
+  { id: 4, homeTeam: 'Uruguay', awayTeam: 'Italy', homeScore: 0, awayScore: 0 },
+  {
+    id: 5,
+    homeTeam: 'Argentina',
+    awayTeam: 'Australia',
+    homeScore: 0,
+    awayScore: 0,
+  },
+  {
+    id: 6,
+    homeTeam: 'Ukraine',
+    awayTeam: 'Spain',
+    homeScore: 0,
+    awayScore: 0,
+  },
+  {
+    id: 7,
+    homeTeam: 'Italy',
+    awayTeam: 'France',
+    homeScore: 0,
+    awayScore: 0,
+  },
+  {
+    id: 8,
+    homeTeam: 'China',
+    awayTeam: 'Japan',
+    homeScore: 0,
+    awayScore: 0,
+  },
+];
+
+export const updatedGamesData = [
+  { id: 1, homeTeam: 'Mexico', awayTeam: 'Canada', homeScore: 1, awayScore: 2 },
+  { id: 2, homeTeam: 'Spain', awayTeam: 'Brazil', homeScore: 3, awayScore: 5 },
+  {
+    id: 3,
+    homeTeam: 'Germany',
+    awayTeam: 'France',
+    homeScore: 0,
+    awayScore: 3,
+  },
+  { id: 4, homeTeam: 'Uruguay', awayTeam: 'Italy', homeScore: 3, awayScore: 2 },
+  {
+    id: 5,
+    homeTeam: 'Argentina',
+    awayTeam: 'Australia',
+    homeScore: 2,
+    awayScore: 5,
+  },
+  {
+    id: 6,
+    homeTeam: 'Ukraine',
+    awayTeam: 'Spain',
+    homeScore: 1,
+    awayScore: 1,
+  },
+  {
+    id: 7,
+    homeTeam: 'Italy',
+    awayTeam: 'France',
+    homeScore: 4,
+    awayScore: 3,
+  },
+  {
+    id: 8,
+    homeTeam: 'China',
+    awayTeam: 'Japan',
+    homeScore: 1,
+    awayScore: 2,
+  },
+];

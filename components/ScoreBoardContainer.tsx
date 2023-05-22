@@ -2,36 +2,41 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Typography } from '@mui/material';
-
-interface GameData {
-  id: number;
-  homeTeam: string;
-  awayTeam: string;
-  homeScore: number;
-  awayScore: number;
-}
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Typography,
+} from '@mui/material';
+import { GameData } from 'types';
 
 const ScoreBoardContainer: React.FC = () => {
   const [games, setGames] = useState<GameData[]>([]);
-  const [homeTeam, setHomeTeam] = useState('');
-  const [awayTeam, setAwayTeam] = useState('');
   const [homeScore, setHomeScore] = useState(0);
   const [awayScore, setAwayScore] = useState(0);
+  const [isAllGamesAdded, setIsAllGamesAdded] = useState(false);
 
-  const startGame = () => {
-    const newGame: GameData = {
-      id: Date.now(),
-      homeTeam,
-      awayTeam,
-      homeScore: 0,
-      awayScore: 0,
-    };
-    setGames([...games, newGame]);
-    setHomeTeam('');
-    setAwayTeam('');
-    setHomeScore(0);
-    setAwayScore(0);
+  const startGame = async () => {
+    try {
+      const response = await fetch('/api/score-board');
+      const data = await response.json();
+
+      if (games.length === data.length) {
+        setIsAllGamesAdded(true);
+      }
+
+      const newGame = {
+        id: games.length + 1,
+        homeScore: 0,
+        awayScore: 0,
+        homeTeam: data[games.length].homeTeam,
+        awayTeam: data[games.length].awayTeam,
+      };
+      setGames((prevGames) => [...prevGames, newGame]);
+    } catch (error) {
+      console.error('Failed to fetch game data:', error);
+    }
   };
 
   const finishGame = (id: number) => {
@@ -53,6 +58,10 @@ const ScoreBoardContainer: React.FC = () => {
     setGames(updatedGames);
     setHomeScore(0);
     setAwayScore(0);
+  };
+
+  const handleCloseModal = () => {
+    setIsAllGamesAdded(false);
   };
 
   return (
@@ -102,6 +111,20 @@ const ScoreBoardContainer: React.FC = () => {
           </Grid>
         ))}
       </Grid>
+      <Dialog open={isAllGamesAdded} onClose={handleCloseModal}>
+        <DialogTitle sx={{ textAlign: 'center' }}>
+          All games have been added
+        </DialogTitle>
+        <DialogContent>
+          <Typography sx={{ textAlign: 'center' }}>
+            You have added all available games. No more games are available to
+            add.
+          </Typography>
+        </DialogContent>
+        <DialogActions sx={{ justifyContent: 'center' }}>
+          <Button onClick={handleCloseModal}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
