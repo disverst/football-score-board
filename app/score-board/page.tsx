@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styles from 'app/score-board/page.module.css';
-import ScoreBoardContainer from 'components/ScoreBoardContainer';
+import ScoreBoardContainer from 'components/ScoreBoard/ScoreBoardContainer';
 
 export default function ScoreBoard() {
   return (
