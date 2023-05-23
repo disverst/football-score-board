@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import {
+  Box,
+  Grid,
+  Button,
   Dialog,
+  Typography,
+  DialogTitle,
   DialogActions,
   DialogContent,
-  DialogTitle,
-  Typography,
 } from '@mui/material';
 import { GameData } from 'types';
 
 const ScoreBoardContainer: React.FC = () => {
   const [games, setGames] = useState<GameData[]>([]);
-  const [homeScore, setHomeScore] = useState(0);
-  const [awayScore, setAwayScore] = useState(0);
   const [isAllGamesAdded, setIsAllGamesAdded] = useState(false);
 
   const startGame = async () => {
@@ -39,25 +37,34 @@ const ScoreBoardContainer: React.FC = () => {
     }
   };
 
+  const updateScore = async (id: number) => {
+    try {
+      const response = await fetch('/api/updated-score-board');
+      const data = await response.json();
+
+      const gameToUpdate = data.find((game: GameData) => game.id === id);
+
+      if (gameToUpdate) {
+        const updatedGames = games.map((game) => {
+          if (game.id === id) {
+            return {
+              ...game,
+              homeScore: gameToUpdate.homeScore,
+              awayScore: gameToUpdate.awayScore,
+            };
+          }
+          return game;
+        });
+        setGames(updatedGames);
+      }
+    } catch (error) {
+      console.error('Failed to fetch updated game data:', error);
+    }
+  };
+
   const finishGame = (id: number) => {
     const updatedGames = games.filter((game) => game.id !== id);
     setGames(updatedGames);
-  };
-
-  const updateScore = (id: number) => {
-    const updatedGames = games.map((game) => {
-      if (game.id === id) {
-        return {
-          ...game,
-          homeScore,
-          awayScore,
-        };
-      }
-      return game;
-    });
-    setGames(updatedGames);
-    setHomeScore(0);
-    setAwayScore(0);
   };
 
   const handleCloseModal = () => {
@@ -112,17 +119,23 @@ const ScoreBoardContainer: React.FC = () => {
         ))}
       </Grid>
       <Dialog open={isAllGamesAdded} onClose={handleCloseModal}>
-        <DialogTitle sx={{ textAlign: 'center' }}>
+        <DialogTitle sx={{ textAlign: 'center', fontWeight: 'bold' }}>
           All games have been added
         </DialogTitle>
         <DialogContent>
-          <Typography sx={{ textAlign: 'center' }}>
+          <Typography sx={{ textAlign: 'center', color: 'red' }}>
             You have added all available games. No more games are available to
             add.
           </Typography>
         </DialogContent>
         <DialogActions sx={{ justifyContent: 'center' }}>
-          <Button onClick={handleCloseModal}>Close</Button>
+          <Button
+            sx={{ backgroundColor: 'red', mb: 1 }}
+            variant="contained"
+            onClick={handleCloseModal}
+          >
+            Close
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
