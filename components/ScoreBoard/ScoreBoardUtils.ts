@@ -54,6 +54,30 @@ export const useScoreBoardUtils = () => {
     }
   };
 
+  const getGamesSummary = () => {
+    const gamesWithTotalScore = games.map((game) => ({
+      ...game,
+      totalScore: game.homeScore + game.awayScore,
+    }));
+
+    const sortedGames = gamesWithTotalScore.sort((a, b) => {
+      if (a.totalScore === b.totalScore) {
+        return b.id - a.id;
+      }
+      return b.totalScore - a.totalScore;
+    });
+
+    const summary = sortedGames.map((game) => ({
+      id: game.id,
+      homeTeam: game.homeTeam,
+      awayTeam: game.awayTeam,
+      homeScore: game.homeScore,
+      awayScore: game.awayScore,
+    }));
+
+    return summary;
+  };
+
   const finishGame = (id: number) => {
     const updatedGames = games.filter((game) => game.id !== id);
     setGames(updatedGames);
@@ -70,6 +94,7 @@ export const useScoreBoardUtils = () => {
     isModalOpen,
     updateScore,
     isAllGamesAdded,
+    getGamesSummary,
     handleCloseModal,
   };
 };
