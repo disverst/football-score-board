@@ -4,10 +4,10 @@ import { Box, Typography } from '@mui/material';
 import { GameData } from 'types';
 
 interface GamesSummaryProps {
-  gamesSummary: GameData[];
+  games: GameData[];
 }
 
-const GamesSummary: React.FC<GamesSummaryProps> = ({ gamesSummary }) => (
+const GamesSummary: React.FC<GamesSummaryProps> = ({ games }) => (
   <Box
     sx={{
       p: 3,
@@ -24,7 +24,7 @@ const GamesSummary: React.FC<GamesSummaryProps> = ({ gamesSummary }) => (
     <Typography variant="h6" component="h2" sx={{ mr: 1 }}>
       Games Summary:
     </Typography>
-    {gamesSummary.map((game: GameData) => (
+    {games.map((game: GameData) => (
       <Typography
         variant="body1"
         component="p"
